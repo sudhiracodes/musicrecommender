@@ -74,11 +74,11 @@ test_recommend_prefers_closer_energy, verifies that when two songs have the same
 
 ## Experiments You Tried
 
-The Weight Shift Experiment: I tested the system's sensitivity by halving the importance of the genre match (from 2.0 to 1.0) and doubling the weight of the energy proximity. This significantly changed the results; songs that were previously buried because of a genre mismatch rose to the top because their "energy vibe" was a near-perfect match.
+- The Weight Shift Experiment: I tested the system's sensitivity by halving the importance of the genre match (from 2.0 to 1.0) and doubling the weight of the energy proximity. This significantly changed the results; songs that were previously buried because of a genre mismatch rose to the top because their "energy vibe" was a near-perfect match.
 
-The Case Sensitivity Test: I discovered that the system is highly sensitive to formatting. Initially, using capitalized "Pop" for a lowercase "pop" entry resulted in a score of 0.0 for that category. Fixing this to lowercase ensured the categorical logic triggered correctly.
+- The Case Sensitivity Test: I discovered that the system is highly sensitive to formatting. Initially, using capitalized "Pop" for a lowercase "pop" entry resulted in a score of 0.0 for that category. Fixing this to lowercase ensured the categorical logic triggered correctly.
 
-Adversarial Profiling: I tested a "Conflicting Profile" (High Energy + Sad Mood). The system revealed its mechanical nature here—it couldn't "understand" that these traits are often opposites in the dataset, so it simply picked the best mathematical middle ground, which didn't always feel like a cohesive musical choice.
+ - Adversarial Profiling: I tested a "Conflicting Profile" (High Energy + Sad Mood). The system revealed its mechanical nature here—it couldn't "understand" that these traits are often opposites in the dataset, so it simply picked the best mathematical middle ground, which didn't always feel like a cohesive musical choice.
 ---
 
 ## Limitations and Risks
