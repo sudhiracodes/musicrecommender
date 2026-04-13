@@ -18,16 +18,33 @@ Replace this paragraph with your own summary of what your version does.
 ## How The System Works
 
 Explain your design in plain language.
+Real-world recommenders track millions of users habits, but my  version would use pure content-based filtering to match a song's vibe directly to a user's taste. It will  score tracks based on exact genre and mood matches, plus a math rule that rewards songs with an energy level closest to the user's target. Finally, it will rank the entire catalog by these scores and recommends the top matches.
 
 Some prompts to answer:
 
 - What features does each `Song` use in your system
   - For example: genre, mood, energy, tempo
+Each Song utilizes categorical features (genre, mood) and continuous numerical features (energy, tempo_bpm).
 - What information does your `UserProfile` store
+The UserProfile stores the user's target preferences for their desired genre, mood, and energy level.
 - How does your `Recommender` compute a score for each song
+The Recommender computes a score by adding points for exact genre or mood matches, plus a mathematical proximity bonus for matching energy.
 - How do you choose which songs to recommend
+The system chooses recommendations by sorting all scored songs in descending order and returning the top k highest-scoring tracks.
 
 You can include a simple diagram or bullet list if helpful.
+
+The Algorithm Recipe:
+The system calculates a similarity score for each track against a user's target profile using the following weighted logic:
+
+Genre Match: +2.0 points (High priority for baseline filtering).
+
+Mood Match: +1.0 points (Secondary categorical filter).
+
+Energy Proximity: Up to +1.0 point, calculated inversely based on the absolute difference between the user's target energy and the song's energy.
+
+Expected Biases:
+Because this is a rigid, rules-based heuristic model rather than a trained neural network, it is highly biased toward exact string matches. It will likely over-prioritize genre, creating a "filter bubble" where a user might miss out on a great song with a matching mood and energy simply because its genre label is slightly different.
 
 ---
 
