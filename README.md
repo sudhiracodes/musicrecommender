@@ -2,39 +2,22 @@
 
 ## Project Summary
 
-In this project you will build and explain a small music recommender system.
-
-Your goal is to:
-
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
-
-Replace this paragraph with your own summary of what your version does.
-
 I built a content-based recommendation engine called VectorVibeMatch. The system analyzes a catalog of songs and compares their metadata (genre, mood, and energy) against a specific user preference profile. By applying a weighted mathematical scoring rule, it identifies which songs "vibe" best with the user and presents a ranked list of suggestions with clear explanations for why each song was chosen.
 
 ---
 
 ## How The System Works
 
-Explain your design in plain language.
+
 Real-world recommenders track millions of users habits, but my  version would use pure content-based filtering to match a song's vibe directly to a user's taste. It will  score tracks based on exact genre and mood matches, plus a math rule that rewards songs with an energy level closest to the user's target. Finally, it will rank the entire catalog by these scores and recommends the top matches.
 
-Some prompts to answer:
+- Each Song utilizes categorical features (genre, mood) and continuous numerical features (energy, tempo_bpm).
 
-- What features does each `Song` use in your system
-  - For example: genre, mood, energy, tempo
-Each Song utilizes categorical features (genre, mood) and continuous numerical features (energy, tempo_bpm).
-- What information does your `UserProfile` store
-The UserProfile stores the user's target preferences for their desired genre, mood, and energy level.
-- How does your `Recommender` compute a score for each song
-The Recommender computes a score by adding points for exact genre or mood matches, plus a mathematical proximity bonus for matching energy.
-- How do you choose which songs to recommend
-The system chooses recommendations by sorting all scored songs in descending order and returning the top k highest-scoring tracks.
+- The UserProfile stores the user's target preferences for their desired genre, mood, and energy level.
 
-You can include a simple diagram or bullet list if helpful.
+- The Recommender computes a score by adding points for exact genre or mood matches, plus a mathematical proximity bonus for matching energy.
+
+- The system chooses recommendations by sorting all scored songs in descending order and returning the top k highest-scoring tracks.
 
 The Algorithm Recipe:
 The system calculates a similarity score for each track against a user's target profile using the following weighted logic:
@@ -84,16 +67,12 @@ pytest
 You can add more tests in `tests/test_recommender.py`.
 
 ---
+ ![Test1:](test1.png)
+![Test2:](test2.png)
+ ![Test3:](test3.png)
 
 ## Experiments You Tried
 
-Use this section to document the experiments you ran. For example:
-
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
-
-Experiments You Tried
 The Weight Shift Experiment: I tested the system's sensitivity by halving the importance of the genre match (from 2.0 to 1.0) and doubling the weight of the energy proximity. This significantly changed the results; songs that were previously buried because of a genre mismatch rose to the top because their "energy vibe" was a near-perfect match.
 
 The Case Sensitivity Test: I discovered that the system is highly sensitive to formatting. Initially, using capitalized "Pop" for a lowercase "pop" entry resulted in a score of 0.0 for that category. Fixing this to lowercase ensured the categorical logic triggered correctly.
@@ -103,15 +82,6 @@ Adversarial Profiling: I tested a "Conflicting Profile" (High Energy + Sad Mood)
 
 ## Limitations and Risks
 
-Summarize some limitations of your recommender.
-
-Examples:
-
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
-
-You will go deeper on this in your model card.
 
 Exact Match Bias: The system relies on exact string matching. If a song is labeled "Lo-fi" and the user asks for "Lofi," the system sees no match at all, creating a "filter bubble."
 
@@ -122,15 +92,6 @@ Lack of Diversity: Because the catalog is small (20 songs), a user might get the
 ---
 
 ## Reflection
-
-Read and complete `model_card.md`:
-
-[**Model Card**](model_card.md)
-
-Write 1 to 2 paragraphs here about what you learned:
-
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
 
 Through this project, I learned that recommendation systems are essentially "weighted translation layers." They take human concepts like "mood" or "energy" and translate them into mathematical distances. I was surprised by how much power the developer has in this process—by simply changing a few numbers in the score_song function, I could completely change what a user sees, which highlights how easily developer bias can steer a user's experience without them knowing.
 

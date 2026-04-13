@@ -59,3 +59,29 @@ def test_explain_recommendation_returns_non_empty_string():
     explanation = rec.explain_recommendation(user, song)
     assert isinstance(explanation, str)
     assert explanation.strip() != ""
+
+
+def test_recommend_prefers_closer_energy():
+    """
+    Ensures that if genres/moods are equal, the song with the energy 
+    level closest to the target is ranked first.
+    """
+    user = UserProfile(
+        favorite_genre="rock",
+        favorite_mood="energetic",
+        target_energy=0.9,
+        likes_acoustic=False
+    )
+    
+    # Two songs with the same genre/mood, but different energy levels
+    song1 = Song(id=1, title="Far Energy", artist="A", genre="rock", mood="energetic", 
+                 energy=0.5, tempo_bpm=120, valence=0.5, danceability=0.5, acousticness=0.1)
+    song2 = Song(id=2, title="Close Energy", artist="B", genre="rock", mood="energetic", 
+                 energy=0.85, tempo_bpm=120, valence=0.5, danceability=0.5, acousticness=0.1)
+    
+    rec = Recommender([song1, song2])
+    results = rec.recommend(user, k=2)
+
+    # The song with 0.85 energy is much closer to the 0.9 target than the 0.5 song
+    assert results[0].title == "Close Energy"
+    assert results[1].title == "Far Energy"
