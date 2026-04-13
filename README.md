@@ -78,7 +78,7 @@ test_recommend_prefers_closer_energy, verifies that when two songs have the same
 
 - The Case Sensitivity Test: I discovered that the system is highly sensitive to formatting. Initially, using capitalized "Pop" for a lowercase "pop" entry resulted in a score of 0.0 for that category. Fixing this to lowercase ensured the categorical logic triggered correctly.
 
- - Adversarial Profiling: I tested a "Conflicting Profile" (High Energy + Sad Mood). The system revealed its mechanical nature here—it couldn't "understand" that these traits are often opposites in the dataset, so it simply picked the best mathematical middle ground, which didn't always feel like a cohesive musical choice.
+ - Adversarial Profiling: I tested a "Conflicting Profile" (High Energy + Sad Mood). The system revealed its mechanical nature here, it couldn't "understand" that these traits are often opposites in the dataset, so it simply picked the best mathematical middle ground, which didn't always feel like a cohesive musical choice.
 ---
 
 ## Limitations and Risks
