@@ -13,6 +13,8 @@ Your goal is to:
 
 Replace this paragraph with your own summary of what your version does.
 
+I built a content-based recommendation engine called VectorVibeMatch. The system analyzes a catalog of songs and compares their metadata (genre, mood, and energy) against a specific user preference profile. By applying a weighted mathematical scoring rule, it identifies which songs "vibe" best with the user and presents a ranked list of suggestions with clear explanations for why each song was chosen.
+
 ---
 
 ## How The System Works
@@ -91,6 +93,12 @@ Use this section to document the experiments you ran. For example:
 - What happened when you added tempo or valence to the score
 - How did your system behave for different types of users
 
+Experiments You Tried
+The Weight Shift Experiment: I tested the system's sensitivity by halving the importance of the genre match (from 2.0 to 1.0) and doubling the weight of the energy proximity. This significantly changed the results; songs that were previously buried because of a genre mismatch rose to the top because their "energy vibe" was a near-perfect match.
+
+The Case Sensitivity Test: I discovered that the system is highly sensitive to formatting. Initially, using capitalized "Pop" for a lowercase "pop" entry resulted in a score of 0.0 for that category. Fixing this to lowercase ensured the categorical logic triggered correctly.
+
+Adversarial Profiling: I tested a "Conflicting Profile" (High Energy + Sad Mood). The system revealed its mechanical nature here—it couldn't "understand" that these traits are often opposites in the dataset, so it simply picked the best mathematical middle ground, which didn't always feel like a cohesive musical choice.
 ---
 
 ## Limitations and Risks
@@ -105,6 +113,12 @@ Examples:
 
 You will go deeper on this in your model card.
 
+Exact Match Bias: The system relies on exact string matching. If a song is labeled "Lo-fi" and the user asks for "Lofi," the system sees no match at all, creating a "filter bubble."
+
+Cold-Start Metadata: The system is only as good as the CSV data. If the energy or mood labels are subjective or poorly assigned by the data entry person, the recommendations will be inaccurate.
+
+Lack of Diversity: Because the catalog is small (20 songs), a user might get the same 5 recommendations repeatedly, leading to a stagnant user experience.
+
 ---
 
 ## Reflection
@@ -117,6 +131,10 @@ Write 1 to 2 paragraphs here about what you learned:
 
 - about how recommenders turn data into predictions
 - about where bias or unfairness could show up in systems like this
+
+Through this project, I learned that recommendation systems are essentially "weighted translation layers." They take human concepts like "mood" or "energy" and translate them into mathematical distances. I was surprised by how much power the developer has in this process—by simply changing a few numbers in the score_song function, I could completely change what a user sees, which highlights how easily developer bias can steer a user's experience without them knowing.
+
+Bias shows up most clearly in how we weigh features. By over-weighting genre, I unintentionally created a system that discourages discovery. This mirrors real-world echo chambers, where an algorithm might keep showing a user the same type of content because it’s the "safest" mathematical match, eventually narrowing the user's perspective or taste over time.
 
 
 ---

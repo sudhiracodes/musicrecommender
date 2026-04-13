@@ -15,15 +15,35 @@ def main() -> None:
     songs = load_songs("data/songs.csv") 
 
     # 1. UPDATED KEYS: These now match what score_song is looking for
-    user_prefs = {
-        "favorite_genre": "Pop", 
-        "favorite_mood": "Happy", 
-        "target_energy": 0.85
-    }
+    # user_prefs = {
+    #     "favorite_genre": "Pop", 
+    #     "favorite_mood": "Happy", 
+    #     "target_energy": 0.85
+    # }
+# # Test 1: High-Energy Pop
+    user_prefs = {"favorite_genre": "pop", "favorite_mood": "happy", "target_energy": 0.85}
+
+# Test 2: Chill Lofi
+
+
+    # user_prefs = {
+    #     "favorite_genre": "Electronic", 
+    #     "favorite_mood": "Chill", 
+    #     "target_energy": 0.3
+    # }
+
+# Test 3: The Adversarial/Conflicting Profile (Sad but High Energy)
+
+
+    # user_prefs = {
+    #     "favorite_genre": "Rock", 
+    #     "favorite_mood": "Sad", 
+    #     "target_energy": 0.95
+    # }
 
     recommendations = recommend_songs(user_prefs, songs, k=5)
 
-    # 2. UPDATED PRINTING: This is the clean CLI layout for your screenshot
+    # 2. UPDATED PRINTING
     print("\n TOP RECOMMENDATIONS \n")
     
     for index, (song, score, explanation) in enumerate(recommendations, start=1):

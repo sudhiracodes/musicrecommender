@@ -51,6 +51,7 @@ class Recommender:
             # 1. Genre Match
             if user.favorite_genre == song.genre:
                 score += 2.0
+                # score += 1.0
             
             # 2. Mood Match
             if user.favorite_mood == song.mood:
@@ -58,6 +59,7 @@ class Recommender:
                 
             # 3. Energy Proximity
             energy_score = 1.0 - abs(user.target_energy - song.energy)
+            # energy_score = 1.0 - abs(user.target_energy - song.energy)*2.0
             score += energy_score
             
             scored_songs.append((song, score))
@@ -75,7 +77,7 @@ class Recommender:
         reasons = []
         
         if user.favorite_genre == song.genre:
-            reasons.append("Genre match (+2.0)")
+            reasons.append("Genre match (+1.0)")
             
         if user.favorite_mood == song.mood:
             reasons.append("Mood match (+1.0)")
