@@ -61,10 +61,11 @@ python -m src.main
 Run the starter tests with:
 
 ```bash
-pytest
+python -m pytest
 ```
+Added test -
 
-You can add more tests in `tests/test_recommender.py`.
+test_recommend_prefers_closer_energy, verifies that when two songs have the same genre and mood, the system correctly uses the energy proximity formula as a tie-breaker to rank the song closest to the user's target energy as the #1 result.
 
 ---
  ![Test1:](test1.png)
